@@ -1,0 +1,6 @@
+{
+  "name": "RéviGenius",
+  "description": "Application éducative pour étudiants universitaires. Comprends tes cours. Maîtrise tes connaissances. Réussis tes examens.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="grad-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="grad-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+  </defs>
+  <!-- Background with rounded corners -->
+  <rect width="512" height="512" rx="120" fill="url(#grad-bg)"/>
+  
+  <!-- Graduation Mortarboard & Book Genius Symbol -->
+  <path d="M256 120L400 196L256 272L112 196L256 120Z" fill="#ffffff" stroke="#ffffff" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M400 196V276" stroke="url(#grad-blue)" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="400" cy="286" r="10" fill="#38bdf8"/>
+  <path d="M168 238V310C168 350 256 376 256 376C256 376 344 350 344 310V238" stroke="#ffffff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Open Book Pages beneath -->
+  <path d="M160 380C208 368 256 384 256 384C256 384 304 368 352 380" stroke="url(#grad-blue)" stroke-width="12" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr" class="h-full bg-white text-slate-900 antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>RéviGenius - Comprends tes cours. Maîtrise tes connaissances. Réussis tes examens.</title>
+    <meta name="description" content="Application éducative pour les étudiants universitaires. Organise tes cours, révise intelligemment et prépare tes examens partout." />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="RéviGenius - L'application de révision universitaire" />
+    <meta property="og:description" content="Comprends tes cours. Maîtrise tes connaissances. Réussis tes examens." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- PWA & Mobile Web App meta -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#059669" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="RéviGenius" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+
+    <!-- Google Fonts: Asynchronous & Non-blocking with system font fallback -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    </noscript>
+  </head>
+  <body class="h-full bg-slate-50 text-slate-900 font-sans selection:bg-emerald-100 selection:text-emerald-900">
+    <div id="root" class="min-h-full flex flex-col">
+      <!-- Instant Fast Splash (0ms initial paint before JS arrives, replaced by React on mount) -->
+      <div id="app-splash" style="position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f8fafc;z-index:99999;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:1.5rem;text-align:center;">
+        <style>
+          @media (prefers-color-scheme: dark) {
+            #app-splash { background: #020617 !important; color: #f8fafc !important; }
+            #app-splash .splash-title { color: #f8fafc !important; }
+            #app-splash .splash-sub { color: #94a3b8 !important; }
+            #app-splash .splash-bar-bg { background: #1e293b !important; }
+          }
+          @keyframes splash-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.92; }
+          }
+          @keyframes splash-progress {
+            0% { width: 15%; left: 0; }
+            50% { width: 70%; left: 15%; }
+            100% { width: 100%; left: 100%; }
+          }
+        </style>
+        <div style="position:relative;width:76px;height:76px;margin-bottom:1.25rem;animation:splash-pulse 1.8s ease-in-out infinite;">
+          <div style="position:absolute;inset:0;border-radius:22px;background:linear-gradient(135deg, #059669, #10b981);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -8px rgba(5,150,105,0.45);">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="splash-title" style="font-size:1.6rem;font-weight:800;letter-spacing:-0.03em;color:#0f172a;margin-bottom:0.25rem;">
+          Révi<span style="color:#059669;">Genius</span>
+        </div>
+        <div class="splash-sub" style="font-size:0.875rem;font-weight:500;color:#64748b;margin-bottom:1.75rem;">
+          Comprends • Maîtrise • Réussis
+        </div>
+        <div class="splash-bar-bg" style="width:130px;height:4px;border-radius:9999px;background:#e2e8f0;overflow:hidden;position:relative;">
+          <div style="position:absolute;top:0;bottom:0;background:#059669;border-radius:9999px;animation:splash-progress 1.2s ease-in-out infinite;"></div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

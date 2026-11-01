@@ -1,0 +1,30 @@
+# Netlify Configuration for RéviGenius PWA
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+# Service worker must never be stale-cached by CDN
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Service-Worker-Allowed = "/"
+
+# Web App Manifest header
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Content-Type = "application/manifest+json; charset=utf-8"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Cache hashed assets aggressively
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# SPA Fallback redirection for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
