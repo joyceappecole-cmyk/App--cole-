@@ -30,3 +30,15 @@
 .pt-safe {
   padding-top: env(safe-area-inset-top, 0rem);
 }
+
+/* Lift the injected "Powered by Netlify" badge so it never covers the app navigation */
+.netlify-badge-offset {
+  bottom: calc(4rem + env(safe-area-inset-bottom, 0px) + 0.75rem) !important;
+  z-index: 30 !important;
+}
+
+@media (min-width: 768px) {
+  .netlify-badge-offset {
+    bottom: 1rem !important;
+  }
+}
