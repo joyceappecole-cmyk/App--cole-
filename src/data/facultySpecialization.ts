@@ -173,7 +173,7 @@ export const FACULTY_TAB_CONFIGS: Record<string, FacultyTabConfig> = {
         quizTab: 'QCM d\'Étude Biblique & Connaissances'
       },
       programme: { short: 'Plan d\'Étude', full: 'Plan de Lecture & Études', hint: 'Méditation quotidienne, lecture suivie et travaux de recherche', examGoalPlaceholder: 'Approfondir l\'exégèse des épîtres et maîtriser la chronologie prophétique' },
-      bibliotheque: { short: 'Bible', full: 'Espace Biblique Intégré', hint: 'Bible hors-ligne, prophéties AT-NT, versets de sagesse et contradictions' },
+      bibliotheque: { short: 'Bible', full: 'Bible numérique (LSG)', hint: 'Bible intégrale 66 livres hors-ligne, favoris, historique et verset du jour' },
     },
     domainQuote: '« Ta parole est une lampe à mes pieds, et une lumière sur mon sentier. » — Psaume 119:105',
     specializedToolLabel: 'Méthode Herméneutique (O.I.A.)',

@@ -40,7 +40,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     { id: 'revisions', label: tabConfig.tabs.revisions.short, hint: tabConfig.tabs.revisions.hint, icon: Brain },
     { id: 'programme', label: tabConfig.tabs.programme.short, hint: tabConfig.tabs.programme.hint, icon: Calendar },
     ...(isBiblicalStudent 
-      ? [{ id: 'espace-biblique', label: 'Bible', hint: 'Espace Biblique & Exégèse', icon: Scroll }] 
+      ? [{ id: 'bible-numerique', label: 'Bible', hint: 'Bible numérique LSG 1910', icon: BookOpen }] 
       : [{ id: 'bibliotheque', label: tabConfig.tabs.bibliotheque.short, hint: tabConfig.tabs.bibliotheque.hint, icon: Library }]
     ),
     { id: 'profil', label: 'Profil', hint: 'Mon profil & joies', icon: User },

@@ -42,9 +42,13 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'revisions', label: tabConfig.tabs.revisions.full },
     { id: 'programme', label: tabConfig.tabs.programme.full },
     ...(isBiblicalStudent 
-      ? [{ id: 'espace-biblique', label: 'Espace Biblique' }] 
+      ? [
+          { id: 'bible-numerique', label: 'Bible numérique' },
+          { id: 'espace-biblique', label: 'Études bibliques' }
+        ] 
       : [{ id: 'bibliotheque', label: tabConfig.tabs.bibliotheque.full }]
     ),
+    { id: 'progression', label: 'Progression' },
     { id: 'profil', label: 'Mon profil' },
     { id: 'parametres', label: 'Paramètres' },
   ];

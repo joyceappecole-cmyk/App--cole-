@@ -71,6 +71,25 @@
         </div>
       </div>
     </div>
+    <script>
+      // Clear dev service workers and caches on dev preview hosts
+      if (location.hostname.includes('ais-dev') || location.hostname.includes('localhost') || location.port === '3000') {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(regs) {
+            for (var i = 0; i < regs.length; i++) {
+              regs[i].unregister();
+            }
+          });
+        }
+        if (typeof caches !== 'undefined') {
+          caches.keys().then(function(keys) {
+            for (var i = 0; i < keys.length; i++) {
+              caches.delete(keys[i]);
+            }
+          });
+        }
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

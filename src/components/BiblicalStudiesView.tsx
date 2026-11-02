@@ -153,6 +153,17 @@ export const BiblicalStudiesView: React.FC<BiblicalStudiesViewProps> = ({
             <p className="text-xs sm:text-sm text-amber-100/90 max-w-2xl leading-relaxed">
               Consulte la Bible hors-ligne, analyse les prophéties accomplies, médite les maximes de sagesse, structure ton étude quotidienne et résous les contradictions apparentes par une recherche rigoureuse.
             </p>
+
+            <div className="pt-2">
+              <button
+                onClick={() => onNavigateTab?.('bible-numerique')}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-xs sm:text-sm bg-white hover:bg-amber-50 text-amber-900 transition-all shadow-md active:scale-95 cursor-pointer"
+              >
+                <BookOpen className="w-4 h-4 text-amber-700" />
+                <span>Lire la Bible numérique intégrée (LSG 1910)</span>
+                <ArrowRight className="w-4 h-4 text-amber-700" />
+              </button>
+            </div>
           </div>
 
           <div className="p-4 rounded-2xl bg-amber-950/60 border border-amber-700/50 text-xs text-amber-100 max-w-xs shrink-0 space-y-1.5">
@@ -243,6 +254,14 @@ export const BiblicalStudiesView: React.FC<BiblicalStudiesViewProps> = ({
                 <BookMarked className="w-4 h-4" />
                 <span>Livres & Chapitres</span>
               </h2>
+
+              <button
+                onClick={() => onNavigateTab?.('bible-numerique')}
+                className="w-full py-2 px-3 rounded-xl text-xs font-bold bg-amber-100 hover:bg-amber-200 dark:bg-amber-950/60 dark:hover:bg-amber-950 text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-800 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Ouvrir les 66 livres complets (LSG)</span>
+              </button>
 
               {/* Sélection du livre */}
               <div className="space-y-1.5">

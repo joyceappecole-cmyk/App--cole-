@@ -171,6 +171,9 @@ export interface DigitalLibraryEntry {
   accessTerms: string;
   facultyId: FacultyId;
   countryNote?: string;
+  isDownloadableOffline?: boolean;
+  requiresInternet?: boolean;
+  downloadableBadgeText?: string;
 }
 
 export interface DigitalLibraryResource {
@@ -226,6 +229,48 @@ export interface BibleBook {
   chaptersCount: number;
   description: string;
   chapters: Record<number, BibleVerse[]>;
+}
+
+export interface BibleMetaBook {
+  nr: number;
+  id: string;
+  name: string;
+  testament: 'Ancien' | 'Nouveau';
+  category: 'Pentateuque' | 'Historique' | 'Poétique & Sagesse' | 'Prophètes majeurs' | 'Prophètes mineurs' | 'Évangiles' | 'Actes' | 'Épîtres de Paul' | 'Épîtres générales' | 'Prophétie & Apocalypse';
+  chaptersCount: number;
+  abbrev: string;
+  description: string;
+}
+
+export interface BibleBookmark {
+  id: string;
+  bookNr: number;
+  bookName: string;
+  chapter: number;
+  verse: number;
+  text: string;
+  date: string;
+  note?: string;
+  color?: 'amber' | 'emerald' | 'sky' | 'rose' | 'purple';
+  tag?: 'Prière' | 'Promesse' | 'Méditation' | 'Foi' | 'Sagesse';
+}
+
+export interface BibleReadingHistoryItem {
+  id: string;
+  bookNr: number;
+  bookName: string;
+  chapter: number;
+  timestamp: number;
+  dateFormatted: string;
+  excerpt?: string;
+}
+
+export interface BibleReadingSettings {
+  fontSize: number; // 14 to 24 px
+  fontFamily: 'serif' | 'sans';
+  theme: 'white' | 'sepia' | 'dark' | 'oled';
+  lineHeight: 'normal' | 'relaxed' | 'loose';
+  showVerseNumbers: boolean;
 }
 
 export interface BibleProphecy {

@@ -584,6 +584,21 @@ export const RevisionsView: React.FC<RevisionsViewProps> = ({
       {activeTab === 'flashcards' && (
         <div className="space-y-6 max-w-2xl mx-auto">
           
+          {/* Beginner-friendly explanation of Spaced Repetition */}
+          <div className="bg-emerald-50/80 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-800/60 rounded-2xl p-4 flex items-start gap-3 text-xs">
+            <div className="p-2 rounded-xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 shrink-0 mt-0.5">
+              <Brain className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="font-bold text-emerald-950 dark:text-emerald-200 text-sm">
+                Répétition Intelligente (Mémorisation espacée)
+              </h3>
+              <p className="text-emerald-800 dark:text-emerald-300 mt-1 leading-relaxed text-[11px]">
+                En réactivant une notion juste avant de l'oublier, ton cerveau l'ancre dans la mémoire à long terme. Formule mentalement la réponse, retourne la carte, puis indique ton niveau d'aisance.
+              </p>
+            </div>
+          </div>
+
           {/* Subject Filter Bar */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full">
             <button
@@ -592,10 +607,10 @@ export const RevisionsView: React.FC<RevisionsViewProps> = ({
                 setCurrentCardIndex(0);
                 setIsFlipped(false);
               }}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors min-h-[36px] ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors min-h-[36px] cursor-pointer ${
                 flashcardSubjectFilter === 'all'
                   ? 'bg-emerald-600 text-white shadow-xs'
-                  : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-50'
+                  : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
               }`}
             >
               Toutes les matières ({flashcards.length})
@@ -641,42 +656,42 @@ export const RevisionsView: React.FC<RevisionsViewProps> = ({
               {/* Flip Card Container */}
               <div
                 onClick={() => setIsFlipped(!isFlipped)}
-                className="cursor-pointer bg-white rounded-3xl p-7 sm:p-10 border-2 border-slate-200 hover:border-emerald-500 transition-all shadow-sm min-h-[290px] flex flex-col justify-between relative group select-none"
+                className="cursor-pointer bg-white dark:bg-slate-900 rounded-3xl p-7 sm:p-10 border-2 border-slate-200 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 transition-all shadow-sm min-h-[290px] flex flex-col justify-between relative group select-none"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
                       {isFlipped ? 'Réponse' : 'Question'}
                     </span>
-                    <span className="text-[11px] font-mono text-slate-400">
-                      {isFlipped ? 'Dos de carte' : 'Recto (clique pour retourner)'}
+                    <span className="text-[11px] font-mono text-slate-400 dark:text-slate-500">
+                      {isFlipped ? 'Dos de carte' : 'Recto (touche pour retourner)'}
                     </span>
                   </div>
 
                   {!isFlipped ? (
                     <div className="my-6">
-                      <p className="text-lg sm:text-xl font-bold text-slate-900 leading-snug">
+                      <p className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug">
                         {activeCard.question}
                       </p>
-                      <p className="text-xs text-slate-400 mt-4">
+                      <p className="text-xs text-slate-400 dark:text-slate-500 mt-4">
                         Formule la réponse dans ta tête avant de cliquer.
                       </p>
                     </div>
                   ) : (
                     <div className="my-6 space-y-3">
-                      <p className="text-sm sm:text-base text-slate-800 leading-relaxed font-medium whitespace-pre-line">
+                      <p className="text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed font-medium whitespace-pre-line">
                         {activeCard.answer}
                       </p>
                     </div>
                   )}
                 </div>
 
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-400">
                   <span className="flex items-center gap-1.5">
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>{isFlipped ? 'Revoir la question' : 'Retourner la carte'}</span>
                   </span>
-                  <span className="font-semibold text-slate-600">
+                  <span className="font-semibold text-slate-600 dark:text-slate-300">
                     Maîtrise : {activeCard.masteryLevel} (Intervalle : {activeCard.intervalDays} j)
                   </span>
                 </div>
@@ -684,33 +699,33 @@ export const RevisionsView: React.FC<RevisionsViewProps> = ({
 
               {/* Répétition Espacée Evaluation Controls */}
               {isFlipped ? (
-                <div className="bg-white p-4 rounded-2xl border border-slate-200 space-y-2">
-                  <span className="block text-center text-xs font-semibold text-slate-700 mb-1">
+                <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-2">
+                  <span className="block text-center text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     Évalue ta restitution (Algorithme de répétition espacée) :
                   </span>
                   <div className="grid grid-cols-3 gap-2">
                     <button
                       onClick={() => handleRateCard('difficile')}
-                      className="py-2.5 px-3 rounded-xl text-xs font-bold text-rose-800 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition-colors flex flex-col items-center justify-center min-h-[50px]"
+                      className="py-2.5 px-3 rounded-xl text-xs font-bold text-rose-800 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 dark:hover:bg-rose-950 border border-rose-200 dark:border-rose-800 transition-colors flex flex-col items-center justify-center min-h-[50px] cursor-pointer"
                     >
                       <span>Difficile</span>
-                      <span className="text-[10px] font-normal text-rose-600">Revoir demain (J+1)</span>
+                      <span className="text-[10px] font-normal text-rose-600 dark:text-rose-400">Revoir demain (J+1)</span>
                     </button>
 
                     <button
                       onClick={() => handleRateCard('moyen')}
-                      className="py-2.5 px-3 rounded-xl text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors flex flex-col items-center justify-center min-h-[50px]"
+                      className="py-2.5 px-3 rounded-xl text-xs font-bold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/50 hover:bg-amber-100 dark:hover:bg-amber-950 border border-amber-200 dark:border-amber-800 transition-colors flex flex-col items-center justify-center min-h-[50px] cursor-pointer"
                     >
                       <span>Moyen</span>
-                      <span className="text-[10px] font-normal text-amber-600">Revoir dans 3 j</span>
+                      <span className="text-[10px] font-normal text-amber-600 dark:text-amber-400">Revoir dans 3 j</span>
                     </button>
 
                     <button
                       onClick={() => handleRateCard('facile')}
-                      className="py-2.5 px-3 rounded-xl text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors flex flex-col items-center justify-center min-h-[50px]"
+                      className="py-2.5 px-3 rounded-xl text-xs font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 dark:hover:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 transition-colors flex flex-col items-center justify-center min-h-[50px] cursor-pointer"
                     >
                       <span>Facile</span>
-                      <span className="text-[10px] font-normal text-emerald-600">Revoir dans 7 j</span>
+                      <span className="text-[10px] font-normal text-emerald-600 dark:text-emerald-400">Revoir dans 7 j</span>
                     </button>
                   </div>
                 </div>
@@ -718,7 +733,7 @@ export const RevisionsView: React.FC<RevisionsViewProps> = ({
                 <div className="flex items-center justify-between">
                   <button
                     onClick={handlePrevCard}
-                    className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 flex items-center gap-1.5 min-h-[40px]"
+                    className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center gap-1.5 min-h-[40px] cursor-pointer"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
                     <span>Précédente</span>
@@ -726,7 +741,7 @@ export const RevisionsView: React.FC<RevisionsViewProps> = ({
 
                   <button
                     onClick={() => onDeleteFlashcard(activeCard.id)}
-                    className="text-xs text-slate-400 hover:text-rose-600 transition-colors flex items-center gap-1"
+                    className="text-xs text-slate-400 hover:text-rose-600 transition-colors flex items-center gap-1 cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                     <span>Supprimer cette carte</span>
@@ -734,7 +749,7 @@ export const RevisionsView: React.FC<RevisionsViewProps> = ({
 
                   <button
                     onClick={handleNextCard}
-                    className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 flex items-center gap-1.5 min-h-[40px]"
+                    className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center gap-1.5 min-h-[40px] cursor-pointer"
                   >
                     <span>Suivante</span>
                     <ArrowRight className="w-3.5 h-3.5" />

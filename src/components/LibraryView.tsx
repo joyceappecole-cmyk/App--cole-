@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   Sparkles,
   BookOpen,
+  Download,
   Wifi,
   Languages,
   Info,
@@ -314,6 +315,17 @@ export const LibraryView: React.FC<LibraryViewProps> = ({
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
                         <Sparkles className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                         Recommandé pour ton cursus
+                      </span>
+                    )}
+                    {lib.isDownloadableOffline || lib.accessTerms.toLowerCase().includes('téléchargeable') || lib.accessTerms.toLowerCase().includes('pdf') ? (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
+                        <Download className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+                        <span>Téléchargeable (PDF libre)</span>
+                      </span>
+                    ) : (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-300 border border-sky-200 dark:border-sky-800 flex items-center gap-1">
+                        <Globe className="w-3 h-3 text-sky-600 dark:text-sky-400" />
+                        <span>En ligne (Connexion requise)</span>
                       </span>
                     )}
                   </div>

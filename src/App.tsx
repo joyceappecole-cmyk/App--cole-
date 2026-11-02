@@ -3,39 +3,27 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { BottomNav } from './components/BottomNav';
 import { Onboarding } from './components/Onboarding';
 import { Dashboard } from './components/Dashboard';
+import { CoursesView } from './components/CoursesView';
+import { RevisionsView } from './components/RevisionsView';
+import { ScheduleView } from './components/ScheduleView';
+import { LibraryView } from './components/LibraryView';
+import { DigitalBibleView } from './components/DigitalBibleView';
+import { BiblicalStudiesView } from './components/BiblicalStudiesView';
+import { ProfileView } from './components/ProfileView';
+import { ProgressionView } from './components/ProgressionView';
+import { SettingsView } from './components/SettingsView';
+import { QuizModal } from './components/QuizModal';
+import { NotificationModal } from './components/NotificationModal';
+import { BeginnerTourModal } from './components/BeginnerTourModal';
+import { PremiumShowcaseModal } from './components/PremiumShowcaseModal';
 import { notificationService } from './services/notificationService';
 import { usePWA } from './hooks/usePWA';
 import { dbService } from './services/db';
-
-// Lazy-loaded secondary views for ultra-fast startup (<100ms)
-const CoursesView = lazy(() => import('./components/CoursesView').then(m => ({ default: m.CoursesView })));
-const RevisionsView = lazy(() => import('./components/RevisionsView').then(m => ({ default: m.RevisionsView })));
-const ScheduleView = lazy(() => import('./components/ScheduleView').then(m => ({ default: m.ScheduleView })));
-const LibraryView = lazy(() => import('./components/LibraryView').then(m => ({ default: m.LibraryView })));
-const BiblicalStudiesView = lazy(() => import('./components/BiblicalStudiesView').then(m => ({ default: m.BiblicalStudiesView })));
-const ProfileView = lazy(() => import('./components/ProfileView').then(m => ({ default: m.ProfileView })));
-const SettingsView = lazy(() => import('./components/SettingsView').then(m => ({ default: m.SettingsView })));
-const QuizModal = lazy(() => import('./components/QuizModal').then(m => ({ default: m.QuizModal })));
-const NotificationModal = lazy(() => import('./components/NotificationModal').then(m => ({ default: m.NotificationModal })));
-
-function TabLoadingFallback() {
-  return (
-    <div className="max-w-5xl mx-auto px-4 py-8 space-y-4 animate-pulse">
-      <div className="h-8 bg-slate-200 dark:bg-slate-800 rounded-xl w-48 mb-6" />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="h-32 bg-slate-200 dark:bg-slate-800 rounded-2xl" />
-        <div className="h-32 bg-slate-200 dark:bg-slate-800 rounded-2xl" />
-        <div className="h-32 bg-slate-200 dark:bg-slate-800 rounded-2xl" />
-      </div>
-      <div className="h-48 bg-slate-200 dark:bg-slate-800 rounded-2xl mt-6" />
-    </div>
-  );
-}
 import { 
   INITIAL_COURSES, 
   INITIAL_FLASHCARDS, 
@@ -128,6 +116,10 @@ export default function App() {
 
   // Modal state for standalone quick quiz
   const [isQuickQuizOpen, setIsQuickQuizOpen] = useState(false);
+
+  // Beginner Mode Tour & Premium Showcase Modals
+  const [isBeginnerTourOpen, setIsBeginnerTourOpen] = useState(false);
+  const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false);
 
   // Modal state for in-app Notifications & Reminders
   const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
@@ -554,6 +546,7 @@ export default function App() {
           setCurrentTab(tab);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        facultyId={studentProfile.facultyId}
         isInstallable={isInstallable}
         onInstall={installApp}
         isOnline={isOnline}
@@ -592,52 +585,58 @@ export default function App() {
             onSelectCourse={() => {
               setCurrentTab('cours');
             }}
+            onOpenBeginnerTour={() => setIsBeginnerTourOpen(true)}
+            onOpenPremiumModal={() => setIsPremiumModalOpen(true)}
           />
         )}
 
-        <Suspense fallback={<TabLoadingFallback />}>
-          {currentTab === 'cours' && (
-            <CoursesView
-              courses={courses}
-              availableSubjects={studentProfile.mainSubjects}
-              onCourseAdded={handleCourseAdded}
-              onCourseDeleted={handleCourseDeleted}
-            />
-          )}
+        {currentTab === 'cours' && (
+          <CoursesView
+            courses={courses}
+            availableSubjects={studentProfile.mainSubjects}
+            currentFacultyId={studentProfile.facultyId}
+            facultyBadge={studentProfile.facultyName}
+            onCourseAdded={handleCourseAdded}
+            onCourseDeleted={handleCourseDeleted}
+          />
+        )}
 
-          {currentTab === 'revisions' && (
-            <RevisionsView
-              sheets={sheets}
-              onAddSheet={handleAddSheet}
-              onUpdateSheet={handleUpdateSheet}
-              onDeleteSheet={handleDeleteSheet}
-              flashcards={flashcards}
-              onAddFlashcard={handleAddFlashcard}
-              onRateFlashcard={handleRateFlashcard}
-              onDeleteFlashcard={handleDeleteFlashcard}
-              quizQuestions={quizQuestions}
-              quizAttempts={quizAttempts}
-              onAddQuizQuestion={handleAddQuizQuestion}
-              onRecordQuizAttempt={handleRecordQuizAttempt}
-              availableSubjects={studentProfile.mainSubjects}
-            />
-          )}
+        {currentTab === 'revisions' && (
+          <RevisionsView
+            sheets={sheets}
+            onAddSheet={handleAddSheet}
+            onUpdateSheet={handleUpdateSheet}
+            onDeleteSheet={handleDeleteSheet}
+            flashcards={flashcards}
+            onAddFlashcard={handleAddFlashcard}
+            onRateFlashcard={handleRateFlashcard}
+            onDeleteFlashcard={handleDeleteFlashcard}
+            quizQuestions={quizQuestions}
+            quizAttempts={quizAttempts}
+            onAddQuizQuestion={handleAddQuizQuestion}
+            onRecordQuizAttempt={handleRecordQuizAttempt}
+            availableSubjects={studentProfile.mainSubjects}
+            facultyId={studentProfile.facultyId}
+            facultyBadge={studentProfile.facultyName}
+          />
+        )}
 
-          {currentTab === 'programme' && (
-            <ScheduleView
-              examPlan={examPlan}
-              onUpdateExamPlan={handleUpdateExamPlan}
-              tasks={tasks}
-              onAddTask={handleAddTask}
-              onUpdateTask={handleUpdateTask}
-              onToggleTask={handleToggleTask}
-              onDeleteTask={handleDeleteTask}
-              quizAttempts={quizAttempts}
-              flashcards={flashcards}
-              courses={courses}
-              availableSubjects={studentProfile.mainSubjects}
-            />
-          )}
+        {currentTab === 'programme' && (
+          <ScheduleView
+            examPlan={examPlan}
+            onUpdateExamPlan={handleUpdateExamPlan}
+            tasks={tasks}
+            onAddTask={handleAddTask}
+            onUpdateTask={handleUpdateTask}
+            onToggleTask={handleToggleTask}
+            onDeleteTask={handleDeleteTask}
+            quizAttempts={quizAttempts}
+            flashcards={flashcards}
+            courses={courses}
+            availableSubjects={studentProfile.mainSubjects}
+            facultyId={studentProfile.facultyId}
+          />
+        )}
 
           {currentTab === 'bibliotheque' && (
             <LibraryView
@@ -647,9 +646,33 @@ export default function App() {
             />
           )}
 
+          {currentTab === 'bible-numerique' && (
+            <DigitalBibleView
+              onNavigateTab={(tab) => {
+                setCurrentTab(tab);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            />
+          )}
+
           {currentTab === 'espace-biblique' && (
             <BiblicalStudiesView
               studentName={studentProfile.name}
+              onNavigateTab={(tab) => {
+                setCurrentTab(tab);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            />
+          )}
+
+          {currentTab === 'progression' && (
+            <ProgressionView
+              studentProfile={studentProfile}
+              courses={courses}
+              flashcards={flashcards}
+              tasks={tasks}
+              quizAttempts={quizAttempts}
+              examPlan={examPlan}
               onNavigateTab={(tab) => {
                 setCurrentTab(tab);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -667,6 +690,8 @@ export default function App() {
           {currentTab === 'parametres' && (
             <SettingsView
               onReplayOnboarding={handleReplayOnboarding}
+              onReplayBeginnerTour={() => setIsBeginnerTourOpen(true)}
+              onOpenPremiumModal={() => setIsPremiumModalOpen(true)}
               isInstallable={isInstallable}
               isInstalled={isInstalled}
               isIOS={isIOS}
@@ -678,7 +703,6 @@ export default function App() {
               onOpenNotifications={() => setIsNotificationModalOpen(true)}
             />
           )}
-        </Suspense>
       </main>
 
       {/* 3. Mobile Bottom Navigation (Visible on Android / Mobile screens) */}
@@ -688,6 +712,7 @@ export default function App() {
           setCurrentTab(tab);
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        facultyId={studentProfile.facultyId}
         isBiblicalStudent={studentProfile.facultyId === 'etudes_bibliques_theologie'}
         studentAvatarUrl={studentProfile.avatarUrl}
         studentJoyMood={studentProfile.joyMood}
@@ -703,27 +728,43 @@ export default function App() {
 
       {/* 5. Standalone Quick Quiz Modal if launched */}
       {isQuickQuizOpen && (
-        <Suspense fallback={null}>
-          <QuizModal
-            questions={quizQuestions}
-            isOpen={isQuickQuizOpen}
-            onClose={() => setIsQuickQuizOpen(false)}
-          />
-        </Suspense>
+        <QuizModal
+          questions={quizQuestions}
+          isOpen={isQuickQuizOpen}
+          onClose={() => setIsQuickQuizOpen(false)}
+        />
       )}
 
       {/* 6. In-App Notifications Modal */}
       {isNotificationModalOpen && (
-        <Suspense fallback={null}>
-          <NotificationModal
-            isOpen={isNotificationModalOpen}
-            onClose={() => setIsNotificationModalOpen(false)}
-            onNavigateTab={(tab) => {
-              setCurrentTab(tab);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-          />
-        </Suspense>
+        <NotificationModal
+          isOpen={isNotificationModalOpen}
+          onClose={() => setIsNotificationModalOpen(false)}
+          onNavigateTab={(tab) => {
+            setCurrentTab(tab);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      )}
+
+      {/* 7. Mode Débutant : Guide pas à pas interactif */}
+      {isBeginnerTourOpen && (
+        <BeginnerTourModal
+          isOpen={isBeginnerTourOpen}
+          onClose={() => setIsBeginnerTourOpen(false)}
+          onNavigateTab={(tab) => {
+            setCurrentTab(tab);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      )}
+
+      {/* 8. Présentation de la Version Premium (Futur) */}
+      {isPremiumModalOpen && (
+        <PremiumShowcaseModal
+          isOpen={isPremiumModalOpen}
+          onClose={() => setIsPremiumModalOpen(false)}
+        />
       )}
 
     </div>

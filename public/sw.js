@@ -1,5 +1,5 @@
-// RéviGenius Service Worker v2 (Production & Offline PWA)
-const CACHE_NAME = 'revigenius-cache-v2';
+// RéviGenius Service Worker v3 (Production & Offline PWA)
+const CACHE_NAME = 'revigenius-cache-v3';
 
 const PRECACHE_ASSETS = [
   '/',
@@ -30,6 +30,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames.map((name) => {
           if (name !== CACHE_NAME) {
+            console.log('[SW] Purging old cache:', name);
             return caches.delete(name);
           }
         })
@@ -46,6 +47,18 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
+
+  // NEVER cache Vite dev server assets, node_modules, src files, or Vite hashes
+  if (
+    url.pathname.startsWith('/node_modules/') ||
+    url.pathname.startsWith('/@') ||
+    url.pathname.startsWith('/src/') ||
+    url.pathname.includes('.vite/') ||
+    url.searchParams.has('v') ||
+    url.searchParams.has('t')
+  ) {
+    return;
+  }
 
   // Do NOT cache external websites or authenticated third-party services
   if (url.origin !== self.location.origin) {
@@ -87,7 +100,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Same-origin static assets: Cache-first with stale-while-revalidate update
+  // Same-origin static assets: Network-first in development or standard cache-first for built assets
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       const fetchPromise = fetch(request)
@@ -99,7 +112,6 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
-          // If offline and not in cache, return undefined
           return cachedResponse;
         });
 

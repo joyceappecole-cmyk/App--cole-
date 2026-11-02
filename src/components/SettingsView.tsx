@@ -17,12 +17,16 @@ import {
   Bell,
   Send,
   RefreshCw,
-  AlertTriangle
+  AlertTriangle,
+  Compass,
+  Crown
 } from 'lucide-react';
 import { notificationService } from '../services/notificationService';
 
 interface SettingsViewProps {
   onReplayOnboarding: () => void;
+  onReplayBeginnerTour?: () => void;
+  onOpenPremiumModal?: () => void;
   isInstallable: boolean;
   isInstalled: boolean;
   isIOS: boolean;
@@ -36,6 +40,8 @@ interface SettingsViewProps {
 
 export const SettingsView: React.FC<SettingsViewProps> = ({
   onReplayOnboarding,
+  onReplayBeginnerTour,
+  onOpenPremiumModal,
   isInstallable,
   isInstalled,
   isIOS,
@@ -100,6 +106,56 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           <span>Revoir la présentation & profil</span>
         </button>
       </div>
+
+      {/* Mode Débutant (Guide pas à pas) */}
+      {onReplayBeginnerTour && (
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <Compass className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+              <h2 className="text-base font-bold text-slate-900 dark:text-white">
+                Guide Débutant interactif
+              </h2>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-xl">
+              Besoin d'un rappel simple sur l'utilisation des 5 fonctionnalités majeures (Révisions, IA, Exercices, Planning, Progression) ?
+            </p>
+          </div>
+
+          <button
+            onClick={onReplayBeginnerTour}
+            className="px-5 py-2.5 rounded-xl text-xs font-bold text-slate-800 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 whitespace-nowrap shrink-0 min-h-[44px] flex items-center justify-center gap-2 cursor-pointer transition-colors"
+          >
+            <Compass className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span>Revoir le guide débutant</span>
+          </button>
+        </div>
+      )}
+
+      {/* Découverte de l'offre Premium (Futur) */}
+      {onOpenPremiumModal && (
+        <div className="bg-gradient-to-r from-amber-500/10 via-amber-600/5 to-emerald-600/10 dark:from-amber-950/30 dark:via-slate-900 dark:to-emerald-950/30 rounded-3xl p-6 border border-amber-200 dark:border-amber-800/60 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <Crown className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+              <h2 className="text-base font-bold text-slate-900 dark:text-white">
+                Version Premium (En préparation)
+              </h2>
+            </div>
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-xl">
+              Découvre les 8 fonctionnalités avancées d'intelligence artificielle en cours de développement et inscris-toi pour être prévenu.
+            </p>
+          </div>
+
+          <button
+            onClick={onOpenPremiumModal}
+            className="px-5 py-2.5 rounded-xl text-xs font-bold text-amber-950 bg-amber-400 hover:bg-amber-300 whitespace-nowrap shrink-0 min-h-[44px] flex items-center justify-center gap-2 cursor-pointer shadow-sm shadow-amber-400/20 transition-all active:scale-95"
+          >
+            <Crown className="w-4 h-4" />
+            <span>Découvrir l'offre Premium</span>
+          </button>
+        </div>
+      )}
 
       {/* 2. PWA & Android Installation */}
       <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-xs space-y-4 transition-colors">
