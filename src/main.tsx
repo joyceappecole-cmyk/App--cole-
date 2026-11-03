@@ -1,6 +1,7 @@
 import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
+import { keepNetlifyBadgeClearOfNav } from './utils/netlifyBadge';
 
 // Manage Service Worker
 if ('serviceWorker' in navigator) {
@@ -31,5 +32,7 @@ if ('serviceWorker' in navigator) {
     }
   }
 }
+
+keepNetlifyBadgeClearOfNav();
 
 createRoot(document.getElementById('root')!).render(<App />);

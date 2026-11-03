@@ -560,7 +560,7 @@ export default function App() {
       />
 
       {/* 2. Main Content Workspace */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-6 pb-28 md:pb-12 overflow-x-hidden">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-6 pb-40 md:pb-24 overflow-x-hidden">
         {currentTab === 'accueil' && (
           <Dashboard
             studentProfile={studentProfile}
