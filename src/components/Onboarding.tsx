@@ -16,7 +16,16 @@ import {
   Trash2,
   Smile,
   Heart,
-  PartyPopper
+  PartyPopper,
+  Brain,
+  Calendar,
+  TrendingUp,
+  HelpCircle,
+  BookMarked,
+  ShieldCheck,
+  Download,
+  Bot,
+  Bell
 } from 'lucide-react';
 import { StudentProfile, FacultyId } from '../types';
 import { FACULTIES } from '../data/mockData';
@@ -162,7 +171,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ currentProfile, onComple
 
   // Go to next slide or proceed to configuration
   const handleNextSlide = () => {
-    if (slideIndex < 2) {
+    if (slideIndex < 3) {
       setSlideIndex((prev) => prev + 1);
     } else {
       setPhase('config');
@@ -235,7 +244,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ currentProfile, onComple
               </div>
 
               <div className="flex items-center gap-1.5">
-                {[0, 1, 2].map((idx) => (
+                {[0, 1, 2, 3].map((idx) => (
                   <span
                     key={idx}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
@@ -248,9 +257,9 @@ export const Onboarding: React.FC<OnboardingProps> = ({ currentProfile, onComple
 
             {/* Slide 0 : Bienvenue & Émotions de joie */}
             {slideIndex === 0 && (
-              <div className="px-6 py-5 sm:py-7 flex flex-col items-center text-center">
+              <div className="px-6 py-5 sm:py-6 flex flex-col items-center text-center">
                 <div className="relative">
-                  <div className="w-28 h-28 sm:w-32 sm:h-32 mb-4 rounded-3xl p-3 bg-gradient-to-b from-emerald-50/90 to-white dark:from-emerald-950/40 dark:to-slate-800 border border-emerald-100 dark:border-emerald-800 shadow-md flex items-center justify-center">
+                  <div className="w-24 h-24 sm:w-28 sm:h-28 mb-3 rounded-3xl p-3 bg-gradient-to-b from-emerald-50/90 to-white dark:from-emerald-950/40 dark:to-slate-800 border border-emerald-100 dark:border-emerald-800 shadow-md flex items-center justify-center">
                     <img
                       src="/logo.png"
                       alt="Logo RéviGenius"
@@ -258,7 +267,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ currentProfile, onComple
                     />
                   </div>
                   {/* Badge flottant d'émotion de joie */}
-                  <div className="absolute -bottom-1 -right-2 bg-amber-400 text-slate-900 px-2 py-0.5 rounded-full text-xs font-black shadow-md flex items-center gap-1 animate-bounce">
+                  <div className="absolute -bottom-1 -right-2 bg-amber-400 text-slate-900 px-2 py-0.5 rounded-full text-[11px] font-black shadow-md flex items-center gap-1 animate-bounce">
                     <Sparkles className="w-3 h-3" />
                     <span>Joie d'apprendre !</span>
                   </div>
@@ -269,16 +278,16 @@ export const Onboarding: React.FC<OnboardingProps> = ({ currentProfile, onComple
                 </div>
 
                 <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-                  Bienvenue sur RéviGenius !
+                  Bienvenue sur RéviGenius
                 </h1>
 
-                <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium max-w-md leading-relaxed">
-                  Ton compagnon pour réviser dans la bonne humeur, sans stress, et célébrer chaque étape de ta réussite académique.
+                <p className="mt-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-medium max-w-md leading-relaxed">
+                  L'application intelligente pour les étudiants universitaires (Médecine, Droit, Cours biblique, Informatique, Économie, Grandes Écoles).
                 </p>
 
                 {/* Sélecteur interactif d'émotions de joie */}
-                <div className="mt-4 w-full max-w-md p-3.5 rounded-2xl bg-gradient-to-r from-emerald-50/80 via-blue-50/80 to-amber-50/80 dark:from-slate-800 dark:to-slate-800/90 border border-emerald-100 dark:border-slate-700 text-left">
-                  <div className="flex items-center justify-between mb-2">
+                <div className="mt-4 w-full max-w-md p-3 rounded-2xl bg-gradient-to-r from-emerald-50/80 via-blue-50/80 to-amber-50/80 dark:from-slate-800 dark:to-slate-800/90 border border-emerald-100 dark:border-slate-700 text-left">
+                  <div className="flex items-center justify-between mb-1.5">
                     <span className="text-[11px] font-bold text-slate-700 dark:text-slate-200 flex items-center gap-1">
                       <Smile className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                       <span>Choisis ton énergie du jour :</span>
@@ -311,81 +320,192 @@ export const Onboarding: React.FC<OnboardingProps> = ({ currentProfile, onComple
                   )}
                 </div>
 
-                <div className="mt-4 p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-400 max-w-sm">
+                <div className="mt-3 p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-400 max-w-sm">
                   <span className="font-semibold text-emerald-800 dark:text-emerald-400">Slogan officiel : </span>
                   « Comprends tes cours. Maîtrise tes connaissances. Réussis tes examens. »
                 </div>
               </div>
             )}
 
-            {/* Slide 1 : Personnalise ton espace */}
+            {/* Slide 1 : Les 5 Piliers d'apprentissage universitaires */}
             {slideIndex === 1 && (
-              <div className="px-6 py-6 sm:py-8 flex flex-col items-center text-center">
-                <div className="w-20 h-20 mb-4 rounded-3xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center border border-blue-100 dark:border-blue-900 shadow-sm">
-                  <Sparkles className="w-10 h-10 text-blue-600 dark:text-blue-400" />
-                </div>
-
-                <div className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/60 mb-2">
-                  Espace sur-mesure & chaleureux
+              <div className="px-6 py-4 sm:py-5 flex flex-col items-center text-center">
+                <div className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60 mb-2">
+                  5 Outils Clés au Quotidien
                 </div>
 
                 <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight max-w-md">
-                  Organise tes études avec enthousiasme et sérénité.
+                  Une méthode d'étude complète et structurée
                 </h2>
 
-                <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-md leading-relaxed">
-                  Ajoute ta photo de profil (ou choisis un avatar joyeux), ton pays, ton établissement et tes matières favorites.
+                <p className="mt-1 text-xs text-slate-600 dark:text-slate-300 max-w-md">
+                  RéviGenius regroupe tout ce dont tu as besoin pour réussir tes examens sans te disperser :
                 </p>
 
-                <div className="mt-5 w-full max-w-md grid grid-cols-2 gap-2 text-left text-xs">
-                  <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-center gap-2">
-                    <Camera className="w-4 h-4 text-pink-600 shrink-0" />
-                    <span className="font-medium text-slate-700 dark:text-slate-300">Photo ou avatar</span>
+                <div className="mt-3.5 w-full max-w-lg space-y-2 text-left text-xs">
+                  <div className="p-2.5 rounded-2xl bg-teal-50/70 dark:bg-teal-950/30 border border-teal-200/60 dark:border-teal-900/40 flex items-start gap-2.5">
+                    <BookOpen className="w-4 h-4 text-teal-700 dark:text-teal-400 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-bold text-teal-950 dark:text-teal-200">1. Mes Révisions & Fiches</div>
+                      <div className="text-[11px] text-teal-900/80 dark:text-teal-300/80">Fiches de synthèse claires, définitions incontournables et résumés par matière.</div>
+                    </div>
                   </div>
-                  <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-center gap-2">
-                    <Globe2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span className="font-medium text-slate-700 dark:text-slate-300">Pays & Région</span>
+
+                  <div className="p-2.5 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200/60 dark:border-indigo-900/40 flex items-start gap-2.5">
+                    <Brain className="w-4 h-4 text-indigo-700 dark:text-indigo-400 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-bold text-indigo-950 dark:text-indigo-200">2. Répétition Espacée (Flashcards SRS)</div>
+                      <div className="text-[11px] text-indigo-900/80 dark:text-indigo-300/80">Mémorisation à long terme selon la courbe de l'oubli (J+1, J+3, J+7).</div>
+                    </div>
                   </div>
-                  <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-center gap-2">
-                    <Building2 className="w-4 h-4 text-blue-600 shrink-0" />
-                    <span className="font-medium text-slate-700 dark:text-slate-300">Établissement</span>
+
+                  <div className="p-2.5 rounded-2xl bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200/60 dark:border-blue-900/40 flex items-start gap-2.5">
+                    <HelpCircle className="w-4 h-4 text-blue-700 dark:text-blue-400 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-bold text-blue-950 dark:text-blue-200">3. Mes Exercices & Quiz</div>
+                      <div className="text-[11px] text-blue-900/80 dark:text-blue-300/80">QCM ciblés avec score immédiat et explications détaillées pour s'auto-évaluer.</div>
+                    </div>
                   </div>
-                  <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-center gap-2">
-                    <GraduationCap className="w-4 h-4 text-indigo-600 shrink-0" />
-                    <span className="font-medium text-slate-700 dark:text-slate-300">Faculté & Matières</span>
+
+                  <div className="p-2.5 rounded-2xl bg-purple-50/70 dark:bg-purple-950/30 border border-purple-200/60 dark:border-purple-900/40 flex items-start gap-2.5">
+                    <Calendar className="w-4 h-4 text-purple-700 dark:text-purple-400 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-bold text-purple-950 dark:text-purple-200">4. Mon Planning & Compte à rebours</div>
+                      <div className="text-[11px] text-purple-900/80 dark:text-purple-300/80">Planification des partiels, compte à rebours et to-do list journalière.</div>
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-900/40 flex items-start gap-2.5">
+                    <TrendingUp className="w-4 h-4 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-bold text-amber-950 dark:text-amber-200">5. Ma Progression & Statistiques Réelles</div>
+                      <div className="text-[11px] text-amber-900/80 dark:text-amber-300/80">Série de jours consécutifs, heures réelles révisées et taux de rétention.</div>
+                    </div>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Slide 2 : Important & Bienveillance */}
+            {/* Slide 2 : Nouveautés Exclusives & Espaces Spécialisés */}
             {slideIndex === 2 && (
-              <div className="px-6 py-6 sm:py-8 flex flex-col items-center text-center">
-                <div className="w-18 h-18 mb-4 rounded-3xl bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 flex items-center justify-center border border-amber-200/80 dark:border-amber-900 shadow-sm">
-                  <AlertTriangle className="w-9 h-9 text-amber-600 dark:text-amber-400" />
+              <div className="px-6 py-4 sm:py-5 flex flex-col items-center text-center">
+                <div className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/60 mb-2">
+                  ✨ Nouvelles Fonctionnalités Majeures
                 </div>
 
-                <div className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-800 mb-2">
-                  Transparence & Sécurité
+                <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight max-w-md">
+                  Bible Numérique, Études Bibliques & Bibliothèque
+                </h2>
+
+                <p className="mt-1 text-xs text-slate-600 dark:text-slate-300 max-w-md">
+                  Des fonctionnalités inédites adaptées à ta filière et accessibles 100% hors-ligne :
+                </p>
+
+                <div className="mt-3.5 w-full max-w-lg space-y-2 text-left text-xs">
+                  <div className="p-2.5 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-900/40 flex items-start gap-2.5">
+                    <BookMarked className="w-4 h-4 text-emerald-700 dark:text-emerald-400 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-bold text-emerald-950 dark:text-emerald-200">📖 Bible Numérique Complète (Louis Segond 1910)</div>
+                      <div className="text-[11px] text-emerald-900/80 dark:text-emerald-300/80">
+                        Les 66 livres (Ancien & Nouveau Testament) intégrés en français, recherche par mot ou verset, favoris, verset du jour inspirant et historique.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-900/40 flex items-start gap-2.5">
+                    <Sparkles className="w-4 h-4 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-bold text-amber-950 dark:text-amber-200">🏛️ Espace Études Bibliques & Paradoxes</div>
+                      <div className="text-[11px] text-amber-900/80 dark:text-amber-300/80">
+                        Guide d'étude quotidienne, prophéties accomplies, versets de sagesse et analyse des contradictions apparentes pour stimuler la réflexion théologique.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-2xl bg-cyan-50/70 dark:bg-cyan-950/30 border border-cyan-200/60 dark:border-cyan-900/40 flex items-start gap-2.5">
+                    <Bot className="w-4 h-4 text-cyan-700 dark:text-cyan-400 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-bold text-cyan-950 dark:text-cyan-200">🤖 Assistant Intelligent & Coach Quotidien</div>
+                      <div className="text-[11px] text-cyan-900/80 dark:text-cyan-300/80">
+                        Recommandations gratuites chaque jour pour progresser et vitrine des prochaines avancées pédagogiques.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-start gap-2.5">
+                    <Download className="w-4 h-4 text-slate-700 dark:text-slate-300 shrink-0 mt-0.5" />
+                    <div>
+                      <div className="font-bold text-slate-900 dark:text-white">📁 Bibliothèque & Documents PDF Téléchargeables</div>
+                      <div className="text-[11px] text-slate-600 dark:text-slate-400">
+                        Livres et annales de référence par filière avec badges clairs « 🟢 Téléchargeable hors ligne » ou « 🌐 En ligne ».
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Slide 3 : Personnalisation, Sérénité & Vie Privée */}
+            {slideIndex === 3 && (
+              <div className="px-6 py-4 sm:py-5 flex flex-col items-center text-center">
+                <div className="w-16 h-16 mb-2 rounded-3xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-200/80 dark:border-emerald-900 shadow-sm">
+                  <ShieldCheck className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+                </div>
+
+                <div className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 mb-1.5">
+                  Simplicité & Contrôle Total
                 </div>
 
                 <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-                  Tes données t'appartiennent à 100%
+                  Un espace sur-mesure et 100% privé
                 </h2>
 
-                <div className="mt-4 p-4 rounded-2xl bg-amber-50/90 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-amber-950 dark:text-amber-200 text-xs sm:text-sm leading-relaxed text-left space-y-2">
-                  <p className="font-semibold text-amber-900 dark:text-amber-300">
-                    « Les profils et données présentés sont uniquement des exemples. Tu as le contrôle absolu sur tes informations. »
-                  </p>
-                  <p className="text-[11px] text-amber-800 dark:text-amber-400 pt-1 border-t border-amber-200/60 dark:border-amber-800/40">
-                    🔒 Aucune inscription en ligne obligatoire ni mot de passe : ta photo et tes cours sont conservés localement sur ton appareil.
-                  </p>
+                <p className="mt-1 text-xs text-slate-600 dark:text-slate-300 max-w-md">
+                  Tout est pensé pour ton confort d'étude et le respect absolu de tes données :
+                </p>
+
+                <div className="mt-3 w-full max-w-lg grid grid-cols-2 gap-2 text-left text-xs">
+                  <div className="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-start gap-2">
+                    <Camera className="w-4 h-4 text-pink-600 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-slate-800 dark:text-slate-200">Photo ou avatar</span>
+                      <p className="text-[10px] text-slate-500">Importe ta photo ou passe pour le faire plus tard.</p>
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-start gap-2">
+                    <Bell className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-slate-800 dark:text-slate-200">Notifications in-app</span>
+                      <p className="text-[10px] text-slate-500">Rappels bienveillants directement dans l'application.</p>
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-start gap-2">
+                    <Building2 className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-slate-800 dark:text-slate-200">Université ou Centre Biblique</span>
+                      <p className="text-[10px] text-slate-500">Choisis ton établissement et ta filière dédiée.</p>
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 flex items-start gap-2">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-bold text-slate-800 dark:text-slate-200">100% Stockage Local</span>
+                      <p className="text-[10px] text-slate-500">Aucun mot de passe requis, données stockées sur ton appareil.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-3 p-2.5 rounded-xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200/60 dark:border-amber-900/40 text-[11px] text-amber-900 dark:text-amber-300 max-w-md text-left">
+                  🔒 <span className="font-semibold">Transparence :</span> Tu as le contrôle absolu sur tes informations. Tu pourras restaurer l'application à tout moment depuis les Paramètres.
                 </div>
               </div>
             )}
 
             {/* Presentation Footer Navigation */}
-            <div className="p-5 sm:p-6 bg-slate-50 dark:bg-slate-800/60 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+            <div className="p-4 sm:p-5 bg-slate-50 dark:bg-slate-800/60 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
               {slideIndex > 0 ? (
                 <button
                   type="button"
@@ -399,7 +519,7 @@ export const Onboarding: React.FC<OnboardingProps> = ({ currentProfile, onComple
                 <div />
               )}
 
-              {slideIndex < 2 ? (
+              {slideIndex < 3 ? (
                 <button
                   type="button"
                   onClick={handleNextSlide}

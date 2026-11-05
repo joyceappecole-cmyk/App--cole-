@@ -17,7 +17,9 @@ import {
   CheckCircle2, 
   X, 
   HelpCircle,
-  ArrowRight
+  ArrowRight,
+  BookMarked,
+  Bell
 } from 'lucide-react';
 
 interface BeginnerTourModalProps {
@@ -44,7 +46,7 @@ const TOUR_STEPS: TourStep[] = [
     stepNumber: 1,
     title: 'Bienvenue sur RéviGenius !',
     subtitle: 'Ton compagnon d\'études simple, moderne et efficace',
-    description: 'RéviGenius a été conçu pour t\'aider à réussir tes examens universitaires sans complication technique. L\'application est intelligente à l\'intérieur, mais reste extrêmement simple à utiliser.',
+    description: 'RéviGenius a été conçu pour t\'aider à réussir tes examens universitaires sans complication technique. L\'application est intelligente à l\'intérieur, mais reste extrêmement simple et claire à l\'extérieur.',
     icon: Sparkles,
     iconBg: 'bg-emerald-500/15 dark:bg-emerald-400/20',
     iconColor: 'text-emerald-700 dark:text-emerald-400',
@@ -80,8 +82,8 @@ const TOUR_STEPS: TourStep[] = [
     iconColor: 'text-indigo-700 dark:text-indigo-400',
     keyPoints: [
       'Indique simplement si une notion a été facile ou difficile.',
-      'L\'application espace automatiquement les prochaines révisions.',
-      'Fonctionne sans aucune intelligence artificielle payante.'
+      'L\'application espace automatiquement les prochaines révisions (J+1, J+3, J+7).',
+      'Calcul mathématique autonome sans surcharge mentale.'
     ]
   },
   {
@@ -102,14 +104,14 @@ const TOUR_STEPS: TourStep[] = [
   },
   {
     stepNumber: 5,
-    title: '4. Mon Planning d\'études',
+    title: '4. Mon Planning & Examens',
     subtitle: 'Organise tes horaires et respecte tes objectifs',
     description: 'Fixe la date de tes examens et définis tes tâches quotidiennes. Le planning t\'aide à garder le rythme sans te sentir débordé.',
     icon: Calendar,
     iconBg: 'bg-purple-500/15 dark:bg-purple-400/20',
     iconColor: 'text-purple-700 dark:text-purple-400',
     keyPoints: [
-      'Planificateur d\'examen avec compte à rebours.',
+      'Planificateur d\'examen avec compte à rebours précis.',
       'Liste de tâches simples à cocher au fil de la journée.',
       'Rappels et notifications intégrées pour rester motivé.'
     ],
@@ -118,16 +120,32 @@ const TOUR_STEPS: TourStep[] = [
   },
   {
     stepNumber: 6,
-    title: '5. Ma Progression & Bibliothèque',
-    subtitle: 'Suis ton évolution et accède à des ressources gratuites',
-    description: 'Visualise tes jours d\'étude, le nombre d\'heures consacrées et accède aux grandes bibliothèques numériques légales recommandées pour ta faculté.',
+    title: '5. Bible Numérique & Études Bibliques',
+    subtitle: 'Texte intégral Louis Segond 1910 et outils théologiques',
+    description: 'Une Bible numérique complète intégrée directement dans l\'application, avec ses 66 livres accessibles hors ligne pour la lecture, la méditation et la recherche.',
+    icon: BookMarked,
+    iconBg: 'bg-emerald-500/15 dark:bg-emerald-400/20',
+    iconColor: 'text-emerald-700 dark:text-emerald-400',
+    keyPoints: [
+      'Ancien Testament (39 livres) et Nouveau Testament (27 livres) en français.',
+      'Recherche textuelle instantanée, versets favoris, verset du jour et historique.',
+      'Espace dédié aux étudiants bibliques : prophéties accomplies, sagesse et paradoxes.'
+    ],
+    actionLabel: 'Ouvrir la Bible',
+    targetTab: 'bible-numerique'
+  },
+  {
+    stepNumber: 7,
+    title: '6. Progression, Bibliothèque & Sérénité',
+    subtitle: 'Suis ton évolution, télécharge tes ressources et reste motivé',
+    description: 'Visualise tes statistiques réelles (série de jours, temps d\'étude) et télécharge les manuels et annales légales de ta filière.',
     icon: TrendingUp,
     iconBg: 'bg-amber-500/15 dark:bg-amber-400/20',
     iconColor: 'text-amber-700 dark:text-amber-400',
     keyPoints: [
       'Statistiques 100% réelles basées sur tes séances enregistrées.',
-      'Bibliothèque numérique classée par filière (Médecine, Droit, Biblique, etc.).',
-      'Tu pourras revoir ce guide à tout moment dans les Paramètres.'
+      'Bibliothèque numérique avec badges 🟢 Téléchargeable ou 🌐 En ligne.',
+      'Import de photo de profil ou avatar et émotions de joie célébrées.'
     ]
   }
 ];
